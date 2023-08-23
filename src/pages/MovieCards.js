@@ -1,42 +1,39 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
-import { BsCheck } from "react-icons/bs";
-import axios from "axios";
+
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import video from "../assets/video.mp4";
 const MovieCards = (props) => {
   const navigate = useNavigate();
+  const { movieData } = props;
+  const { thumbnail, keywords, title } = movieData;
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
+
   onAuthStateChanged(firebaseAuth, (currentUser) => {
     if (currentUser) {
       setEmail(currentUser.email);
     } else navigate("/login");
   });
-  const { movieData } = props;
-  const { thumbnail, keywords, title, id } = movieData;
+
   return (
     <Container
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img
-        src={thumbnail}
-        alt="movie-image"
-        onClick={() => navigate("/player")}
-      />
+      <img src={thumbnail} alt="movie" onClick={() => navigate("/player")} />
       {isHovered && (
         <div className="hover">
           <div className="image-video-container">
             <img
               src={thumbnail}
-              alt="image"
+              alt="movie"
               onClick={() => navigate("/player")}
             />
             <video
@@ -78,13 +75,13 @@ const MovieCards = (props) => {
     </Container>
   );
 };
-export default MovieCards;
 
 const Container = styled.div`
   max-width: 230px;
   width: 230px;
   height: 200px;
   cursor: pointer;
+  padding: 10px;
   position: relative;
   img {
     border-radius: 0.2rem;
@@ -156,3 +153,4 @@ const Container = styled.div`
     }
   }
 `;
+export default MovieCards;

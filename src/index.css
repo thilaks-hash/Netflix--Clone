@@ -46,3 +46,6 @@ body::-webkit-scrollbar {
 .f-wrap {
   flex-wrap: wrap;
 }
+.tvcard {
+  padding: 10px;
+}

@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
-import Slider from "../components/Slider";
+import MovieCards from "./MovieCards";
 
-const Movies = () => {
+const PopularMovie = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const [movies, setMovies] = useState([]);
+  const [popularMovie, setPopularMovie] = useState([]);
 
-  const FetchMovies = async () => {
+  const FetchPopularMovie = async () => {
     const data = await fetch(
-      "https://academics.newtonschool.co/api/v1/ott/show",
+      'https://academics.newtonschool.co/api/v1/ott/show?filter={"type" : "web series"}',
       {
         headers: {
           projectId: "711pehg5ja32",
@@ -19,11 +19,11 @@ const Movies = () => {
     );
     const json = await data.json();
     console.log(json.data);
-    setMovies(json.data);
+    setPopularMovie(json.data);
   };
 
   useEffect(() => {
-    FetchMovies();
+    FetchPopularMovie();
   }, []);
 
   window.onscroll = () => {
@@ -31,18 +31,27 @@ const Movies = () => {
     return () => (window.onscroll = null);
   };
   return (
-    <Container>
-      <div className="navbar">
-        <Navbar isScrolled={isScrolled} />
-      </div>
-      <div className="data">
-        <Slider movies={movies} />
-      </div>
-    </Container>
+    <>
+      <Navbar isScrolled={isScrolled} />
+      <Container>
+        <div className="data">
+          {popularMovie.map((movie, index) => {
+            return (
+              <MovieCards movieData={movie} index={index} key={movie.id} />
+            );
+          })}
+        </div>
+      </Container>
+    </>
   );
 };
 
 const Container = styled.div`
+  .data {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .data {
     margin-top: 8rem;
     .not-available {
@@ -52,4 +61,4 @@ const Container = styled.div`
     }
   }
 `;
-export default Movies;
+export default PopularMovie;

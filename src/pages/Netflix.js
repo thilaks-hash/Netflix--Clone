@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-
 import { onAuthStateChanged } from "firebase/auth";
 import { firebaseAuth } from "../utils/firebase-config";
 import { useNavigate } from "react-router-dom";
@@ -46,8 +45,8 @@ const Netflix = () => {
             </div>
           </div>
         </div>
+        <Movies />
       </Container>
-      <Movies />
     </>
   );
 };
