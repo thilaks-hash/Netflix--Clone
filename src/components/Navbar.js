@@ -5,9 +5,16 @@ import styled from "styled-components";
 import logo from "../assets/logo.png";
 import { firebaseAuth } from "../utils/firebase-config";
 import { FaPowerOff, FaSearch } from "react-icons/fa";
+import avatar from "../assets/Netflix-avatar.png";
+import Subscription from "./Subscription";
 const Navbar = ({ isScrolled }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   const links = [
     { name: "Home", link: "/" },
     { name: "TV Shows", link: "/tv" },
@@ -55,8 +62,24 @@ const Navbar = ({ isScrolled }) => {
               }}
             />
           </div>
-          <button onClick={() => signOut(firebaseAuth)}>
-            <FaPowerOff />
+          <button onClick={toggleDropdown}>
+            <div className="image-dropdown">
+              <img src={avatar} alt="avatar_icon" className="avatar" />
+              {isDropdownOpen && (
+                <div className="dropdown-content">
+                  <ul>
+                    <li>
+                      <Link to={"/subscription"}>Subscription</Link>
+                    </li>
+                    <li>
+                      <a href="/" onClick={() => signOut(firebaseAuth)}>
+                        SignOut
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
           </button>
         </div>
       </nav>
@@ -153,6 +176,52 @@ const Container = styled.div`
         }
       }
     }
+  }
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+  /* Example styles, adjust as needed */
+  .image-dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
+  .image-dropdown img {
+    cursor: pointer;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+    z-index: 1;
+    padding-right: 60px;
+  }
+
+  .dropdown-content ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dropdown-content li {
+    padding: 8px 16px;
+  }
+
+  .dropdown-content a {
+    text-decoration: none;
+    color: #333;
+  }
+
+  .dropdown-content a:hover {
+    background-color: #f1f1f1;
   }
 `;
 export default Navbar;

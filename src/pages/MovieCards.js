@@ -90,11 +90,12 @@ const Container = styled.div`
     z-index: 10;
   }
   .hover {
-    z-index: 99;
+    margin-buttom: 10px;
+    z-index: 89;
     height: max-content;
     width: 20rem;
     position: absolute;
-    top: -18vh;
+    top: -10vh;
     left: 0;
     border-radius: 0.3rem;
     box-shadow: rgba(0, 0, 0, 0.75) 0px 3px 10px;

@@ -28,6 +28,8 @@ const Container = styled.div`
     margin-left: 50px;
   }
   .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
     .slider {
       width: max-content;
       gap: 1rem;
@@ -47,14 +49,8 @@ const Container = styled.div`
         font-size: 2rem;
       }
     }
-    .none {
-      display: none;
-    }
-    .left {
-      left: 0;
-    }
-    .right {
-      right: 0;
-    }
+  }
+  .wrapper::-webkit-scrollbar {
+    display: none;
   }
 `;
