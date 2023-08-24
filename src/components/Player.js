@@ -2,21 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import { BsArrowLeft } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import video from "../assets/video.mp4";
-export default function Player() {
-  const navigate = useNavigate();
+import { useLocation } from "react-router-dom"; // Import useLocation hook
+
+const Player = () => {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const videoUrl = searchParams.get("videoUrl");
 
   return (
-    <Container>
-      <div className="player">
-        <div className="back">
-          <BsArrowLeft onClick={() => navigate(-1)} />
-        </div>
-        <video src={video} autoPlay loop controls muted />
-      </div>
-    </Container>
+    <div>
+      <video controls>
+        <source src={videoUrl} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
   );
-}
+};
+
+export default Player;
 
 const Container = styled.div`
   .player {

@@ -49,3 +49,46 @@ body::-webkit-scrollbar {
 .tvcard {
   padding: 10px;
 }
+.movie-content {
+  text-align: center;
+  margin: 20px;
+}
+.content {
+  display: flex;
+}
+
+.thumbnail {
+  max-width: 500px;
+  height: 500px;
+  padding: 50px;
+  margin: 20px;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 50px;
+}
+
+.play-button {
+  display: flex;
+
+  justify-content: center;
+  margin-top: 10px;
+  padding: 10px;
+  background-color: red;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.play-button:hover {
+  background-color: rgba(255, 0, 0, 0.645);
+}
+
+.play-icon {
+  margin-right: 5px;
+}
+.cast {
+  font-size: 30px;
+}

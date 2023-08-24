@@ -12,7 +12,7 @@ import video from "../assets/video.mp4";
 const MovieCards = (props) => {
   const navigate = useNavigate();
   const { movieData } = props;
-  const { thumbnail, keywords, title } = movieData;
+  const { thumbnail, keywords, title, _id } = movieData;
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
 
@@ -27,14 +27,18 @@ const MovieCards = (props) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img src={thumbnail} alt="movie" onClick={() => navigate("/player")} />
+      <img
+        src={thumbnail}
+        alt="movie"
+        onClick={() => navigate("/moviecontent/" + _id)}
+      />
       {isHovered && (
         <div className="hover">
           <div className="image-video-container">
             <img
               src={thumbnail}
               alt="movie"
-              onClick={() => navigate("/player")}
+              onClick={() => navigate("/moviecontent/" + _id)}
             />
             <video
               src={video}
@@ -45,7 +49,10 @@ const MovieCards = (props) => {
             />
           </div>
           <div className="info-container flex column">
-            <h3 className="name" onClick={() => navigate("/player")}>
+            <h3
+              className="name"
+              onClick={() => navigate("/moviecontent/" + _id)}
+            >
               {title}
             </h3>
             <div className="icons flex j-between">

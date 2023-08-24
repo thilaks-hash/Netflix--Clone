@@ -7,6 +7,7 @@ import Player from "./components/Player";
 import TVShows from "./pages/TVShows";
 import PopularMovie from "./pages/PopularMovie";
 import Subscription from "./components/Subscription";
+import MovieContent from "./pages/MovieContent";
 const App = () => {
   return (
     <BrowserRouter>
@@ -17,6 +18,7 @@ const App = () => {
         <Route exact path="/tv" element={<TVShows />} />
         <Route exact path="/movies" element={<PopularMovie />} />
         <Route exact path="/subscription" element={<Subscription />} />
+        <Route exact path="/moviecontent/:movieId" element={<MovieContent />} />
 
         <Route exact path="/" element={<Netflix />} />
       </Routes>
