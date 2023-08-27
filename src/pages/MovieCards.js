@@ -14,16 +14,28 @@ const MovieCards = (props) => {
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
   const [selectList, setSelectList] = useState("");
+  const token = localStorage.getItem("jwtToken");
 
   const addToList = async () => {
+    const showId = _id;
+    const requestBody = {
+      showId: showId,
+    };
+    console.log(requestBody);
+
     const data = await fetch(
-      "https://academics.newtonschool.co/api/v1/ott/show",
+      " https://academics.newtonschool.co/api/v1/ott/watchlist/like",
       {
+        method: "PATCH",
         headers: {
           projectId: "711pehg5ja32",
+          Authorization: `Bearer ${token}`,
+          body: JSON.stringify(requestBody),
+          "Content-Type": "application/json",
         },
       }
     );
+
     const json = await data.json();
     console.log(json.data);
   };
