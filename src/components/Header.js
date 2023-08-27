@@ -5,7 +5,7 @@ import React from "react";
 export default function Header(props) {
   const navigate = useNavigate();
   return (
-    <StyledHeader className="flex align-content-center j-between">
+    <StyledHeader className=" head">
       <div className="logo">
         <img src={logo} alt="netflix logo" />
       </div>
@@ -22,9 +22,7 @@ const StyledHeader = styled.header`
       height: 5rem;
     }
   }
-  .body {
-    display: flex;
-  }
+
   button {
     padding: 0.5rem 1rem;
     background-color: #e50914;

@@ -3,25 +3,54 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import { firebaseAuth } from "../utils/firebase-config";
+import axios from "axios";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const projectId = "711pehg5ja32";
+
+  let headersList = {
+    projectId: projectId,
+    "Content-Type": "application/json",
+  };
+
+  let reqOptions = {
+    url: "https://academics.newtonschool.co/api/v1/user/login",
+    method: "POST",
+    headers: headersList,
+  };
+
+  const login = async () => {
     try {
-      await signInWithEmailAndPassword(firebaseAuth, email, password);
+      let response = await axios.request(reqOptions);
+      console.log(response);
+      if (response.status === 200) {
+        console.log(response);
+
+        localStorage.setItem("jwtToken", response.data.token);
+        localStorage.setItem("userName", response.data.name);
+        navigate("/");
+      }
     } catch (error) {
-      console.log(error.code);
+      const errMsg = error?.response?.data?.message;
+      console.error(error, errMsg);
     }
   };
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) navigate("/");
-  });
+  const handleLogin = () => {
+    const bodyContent = JSON.stringify({
+      email: email,
+      password: password,
+      appType: "ott",
+    });
+
+    reqOptions.data = bodyContent;
+
+    login();
+  };
 
   return (
     <Container>
@@ -37,14 +66,14 @@ function Login() {
               <input
                 type="text"
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
                 value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <input
                 type="password"
                 placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
                 value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <button onClick={handleLogin}>Login to your account</button>
             </div>

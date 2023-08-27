@@ -6,8 +6,6 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
 
-import { onAuthStateChanged } from "firebase/auth";
-import { firebaseAuth } from "../utils/firebase-config";
 import video from "../assets/video.mp4";
 const MovieCards = (props) => {
   const navigate = useNavigate();
@@ -15,12 +13,20 @@ const MovieCards = (props) => {
   const { thumbnail, keywords, title, _id } = movieData;
   const [isHovered, setIsHovered] = useState(false);
   const [email, setEmail] = useState(undefined);
+  const [selectList, setSelectList] = useState("");
 
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (currentUser) {
-      setEmail(currentUser.email);
-    } else navigate("/login");
-  });
+  const addToList = async () => {
+    const data = await fetch(
+      "https://academics.newtonschool.co/api/v1/ott/show",
+      {
+        headers: {
+          projectId: "711pehg5ja32",
+        },
+      }
+    );
+    const json = await data.json();
+    console.log(json.data);
+  };
 
   return (
     <Container
@@ -63,7 +69,10 @@ const MovieCards = (props) => {
                 />
                 <RiThumbUpFill title="Like" />
                 <RiThumbDownFill title="Dislike" />
-                <AiOutlinePlus title="Add to my list" />
+
+                {/* <BsCheck title="Remove from List" onClick={addToList} /> */}
+
+                <AiOutlinePlus title="Add to my list" onClick={addToList} />
               </div>
               <div className="info">
                 <BiChevronDown title="More Info" />

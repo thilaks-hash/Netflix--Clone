@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import { onAuthStateChanged } from "firebase/auth";
-import { firebaseAuth } from "../utils/firebase-config";
+
 import { useNavigate } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -11,9 +10,7 @@ import Movies from "./Movies";
 const Netflix = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
-  onAuthStateChanged(firebaseAuth, (currentUser) => {
-    if (!currentUser) navigate("/login");
-  });
+
   window.onscroll = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);

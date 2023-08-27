@@ -8,20 +8,34 @@ import TVShows from "./pages/TVShows";
 import PopularMovie from "./pages/PopularMovie";
 import Subscription from "./components/Subscription";
 import MovieContent from "./pages/MovieContent";
+import Mylist from "./pages/Mylist";
+import { SearchProvider } from "./utils/SearchContext";
+import SearchResults from "./components/SearchResults";
+import SearchBar from "./components/SearchBar";
+import UserProfilePage from "./pages/UserProfile";
 const App = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route exact path="/login" element={<Login />} />
-        <Route exact path="/signup" element={<Signup />} />
-        <Route exact path="/player" element={<Player />} />
-        <Route exact path="/tv" element={<TVShows />} />
-        <Route exact path="/movies" element={<PopularMovie />} />
-        <Route exact path="/subscription" element={<Subscription />} />
-        <Route exact path="/moviecontent/:movieId" element={<MovieContent />} />
+      <SearchProvider>
+        <Routes>
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/player" element={<Player />} />
+          <Route exact path="/tv" element={<TVShows />} />
+          <Route exact path="/movies" element={<PopularMovie />} />
+          <Route exact path="/subscription" element={<Subscription />} />
+          <Route
+            exact
+            path="/moviecontent/:movieId"
+            element={<MovieContent />}
+          />
+          <Route exact path="/mylist" element={<Mylist />} />
+          <Route exact path="/search" element={<SearchResults />} />
+          <Route exact path="/userprofile" element={<UserProfilePage />} />
 
-        <Route exact path="/" element={<Netflix />} />
-      </Routes>
+          <Route exact path="/" element={<Netflix />} />
+        </Routes>
+      </SearchProvider>
     </BrowserRouter>
   );
 };

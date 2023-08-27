@@ -1,18 +1,33 @@
-import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-import { firebaseAuth } from "../utils/firebase-config";
-import { FaPowerOff, FaSearch } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import avatar from "../assets/Netflix-avatar.png";
-import Subscription from "./Subscription";
+import { useNavigate } from "react-router-dom";
+import { useSearch } from "../utils/SearchContext";
+
 const Navbar = ({ isScrolled }) => {
+  const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const { searchQuery, setSearchQuery } = useSearch();
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  const handleChange = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+  };
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      if (searchQuery.trim() !== "") {
+        navigate("/search");
+      }
+    }
   };
 
   const links = [
@@ -54,6 +69,9 @@ const Navbar = ({ isScrolled }) => {
             <input
               type="text"
               placeholder="Search"
+              value={searchQuery}
+              onChange={handleChange}
+              onKeyDown={handleKeyDown}
               onMouseEnter={() => setInputHover(true)}
               onMouseLeave={() => setInputHover(false)}
               onBlur={() => {
@@ -72,9 +90,10 @@ const Navbar = ({ isScrolled }) => {
                       <Link to={"/subscription"}>Subscription</Link>
                     </li>
                     <li>
-                      <a href="/" onClick={() => signOut(firebaseAuth)}>
-                        SignOut
-                      </a>
+                      <Link to={"/login"}>SignOut</Link>
+                    </li>
+                    <li>
+                      <Link to={"/userprofile"}>Profile Setting</Link>
                     </li>
                   </ul>
                 </div>
@@ -91,7 +110,6 @@ const Container = styled.div`
     background-color: black;
   }
   nav {
-    position: sticky;
     top: 0;
     height: 6.5rem;
     width: 100%;
@@ -181,7 +199,7 @@ const Container = styled.div`
     width: 40px;
     height: 40px;
   }
-  /* Example styles, adjust as needed */
+
   .image-dropdown {
     position: relative;
     display: inline-block;

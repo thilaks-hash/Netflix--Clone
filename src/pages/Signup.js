@@ -2,46 +2,64 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
-import { firebaseAuth } from "../utils/firebase-config";
-import {
-  createUserWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
+import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
-  const [formValues, setFormValues] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(firebaseAuth, (currentUser) => {
-      if (currentUser) {
+  const projectId = "711pehg5ja32";
+
+  let headersList = {
+    projectId: projectId,
+    "Content-Type": "application/json",
+  };
+
+  let reqOptions = {
+    url: "https://academics.newtonschool.co/api/v1/user/signup",
+    method: "POST",
+    headers: headersList,
+  };
+
+  const login = async () => {
+    try {
+      let response = await axios.request(reqOptions);
+      console.log(response);
+      if (response.status === 201) {
+        console.log(response);
+
+        alert("SuccessFully SignedUp");
+
         navigate("/");
       }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-  const handleSignIn = async () => {
-    // console.log(formValues);
-    try {
-      const { email, password } = formValues;
-      await createUserWithEmailAndPassword(firebaseAuth, email, password);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      const errMsg = error?.response?.data?.message;
+      console.error(error, errMsg);
+      if (errMsg === "User already exists") {
+        alert("User already exist");
+      } else {
+        console.log("error");
+      }
     }
   };
-  // onAuthStateChanged(firebaseAuth, (currentUser) => {
-  //   if (currentUser) navigate("/");
-  // });
+  const handleSignUp = async () => {
+    const bodyContent = JSON.stringify({
+      name: username,
+      email: email,
+      password: password,
+      appType: "ott",
+    });
+
+    reqOptions.data = bodyContent; // Update the data in the request options
+
+    await login();
+  };
+
   return (
-    <Container showPassword={showPassword}>
+    <Container>
       <BackgroundImage />
       <div className="content">
         <Header login />
@@ -55,39 +73,29 @@ const Signup = () => {
           </div>
           <div className="form">
             <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <input
               type="email"
               name="email"
               placeholder="Email Address"
-              value={formValues.email}
-              onChange={(e) =>
-                setFormValues({
-                  ...formValues,
-                  [e.target.name]: e.target.value,
-                })
-              }
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
-            {showPassword && (
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={formValues.password}
-                onChange={(e) =>
-                  setFormValues({
-                    ...formValues,
-                    [e.target.name]: e.target.value,
-                  })
-                }
-              />
-            )}
-            {!showPassword && (
-              <button onClick={() => setShowPassword(true)}>
-                {" "}
-                Get Started
-              </button>
-            )}
+
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </div>
-          <button onClick={handleSignIn}>Sign up</button>
+          <button onClick={handleSignUp}>Sign up</button>
         </div>
       </div>
     </Container>
