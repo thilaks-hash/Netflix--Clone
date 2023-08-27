@@ -92,3 +92,12 @@ body::-webkit-scrollbar {
 .cast {
   font-size: 30px;
 }
+.casts {
+  padding: 10px;
+}
+.genres {
+  padding: 10px;
+}
+.des {
+  padding: 10px;
+}

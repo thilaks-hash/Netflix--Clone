@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 
 import MovieCards from "../pages/MovieCards";
@@ -12,7 +12,7 @@ export default React.memo(function CardSlider({ data, title }) {
         <div className="slider flex" ref={listRef}>
           {data.map((movie, index) => {
             return (
-              <MovieCards movieData={movie} index={index} key={movie.id} />
+              <MovieCards movieData={movie} key={movie.id} isLiked={false} />
             );
           })}
         </div>

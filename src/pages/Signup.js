@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import BackgroundImage from "../components/BackgroundImage";
 import Header from "../components/Header";
@@ -63,7 +63,7 @@ const Signup = () => {
       <BackgroundImage />
       <div className="content">
         <Header login />
-        <div className="body flex column a-center j-center">
+        <div className="body form-container flex column a-center j-center">
           <div className="text flex column">
             <h1>Unlimited movies, TV shows and more</h1>
             <h4>Watch anywhere. Cancel anytime.</h4>
@@ -71,36 +71,86 @@ const Signup = () => {
               Ready to watch? Enter your email to create or restart membership
             </h6>
           </div>
-          <div className="form">
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email Address"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <div className="form flex column a-center j-center">
+            <div className="container flex column">
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email Address"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
 
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <button className="btn" onClick={handleSignUp}>
+              Sign up
+            </button>
           </div>
-          <button onClick={handleSignUp}>Sign up</button>
         </div>
       </div>
     </Container>
   );
 };
-const Container = styled.div``;
+const Container = styled.div`
+  position: relative;
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    grid-template-rows: 15vh 85vh;
+    .form-container {
+      gap: 2rem;
+      height: 85vh;
+      .form {
+        padding: 2rem;
+        background-color: #000000b0;
+        width: 25vw;
+        gap: 2rem;
+        color: white;
+        .container {
+          gap: 2rem;
+          input {
+            padding: 0.5rem 1rem;
+            width: 15rem;
+          }
+          button {
+            padding: 0.5rem 1rem;
+            background-color: red;
+            border: none;
+            cursor: pointer;
+            color: white;
+            border-radius: 0.2rem;
+            font-weight: bolder;
+            font-size: 1.05rem;
+          }
+        }
+      }
+    }
+  }
+  .btn {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+  }
+`;
 
 export default Signup;

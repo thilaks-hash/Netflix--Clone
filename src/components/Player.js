@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { BsArrowLeft } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+
 import { useLocation } from "react-router-dom"; // Import useLocation hook
 
 const Player = () => {
@@ -10,12 +9,14 @@ const Player = () => {
   const videoUrl = searchParams.get("videoUrl");
 
   return (
-    <div>
-      <video controls>
-        <source src={videoUrl} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-    </div>
+    <Container>
+      <div>
+        <video controls>
+          <source src={videoUrl} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </Container>
   );
 };
 

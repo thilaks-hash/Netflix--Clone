@@ -35,10 +35,8 @@ const PopularMovie = () => {
       <Navbar isScrolled={isScrolled} />
       <Container>
         <div className="data">
-          {popularMovie.map((movie, index) => {
-            return (
-              <MovieCards movieData={movie} index={index} key={movie.id} />
-            );
+          {popularMovie.map((movie) => {
+            return <MovieCards movieData={movie} key={movie._id} />;
           })}
         </div>
       </Container>

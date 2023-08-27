@@ -3,20 +3,26 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IoPlayCircleSharp } from "react-icons/io5";
 import { AiOutlinePlus } from "react-icons/ai";
+import { BsCheck } from "react-icons/bs";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
 
 import video from "../assets/video.mp4";
 const MovieCards = (props) => {
   const navigate = useNavigate();
+
   const { movieData } = props;
   const { thumbnail, keywords, title, _id } = movieData;
   const [isHovered, setIsHovered] = useState(false);
-  const [email, setEmail] = useState(undefined);
-  const [selectList, setSelectList] = useState("");
+  const [liked, setLiked] = useState(false);
   const token = localStorage.getItem("jwtToken");
 
   const addToList = async () => {
+    if (liked === false) {
+      setLiked(true);
+    } else {
+      setLiked(false);
+    }
     const showId = _id;
     const requestBody = {
       showId: showId,
@@ -30,9 +36,10 @@ const MovieCards = (props) => {
         headers: {
           projectId: "711pehg5ja32",
           Authorization: `Bearer ${token}`,
-          body: JSON.stringify(requestBody),
+
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(requestBody),
       }
     );
 
@@ -51,7 +58,7 @@ const MovieCards = (props) => {
         onClick={() => navigate("/moviecontent/" + _id)}
       />
       {isHovered && (
-        <div className="hover">
+        <div className="hover" key={_id}>
           <div className="image-video-container">
             <img
               src={thumbnail}
@@ -82,9 +89,11 @@ const MovieCards = (props) => {
                 <RiThumbUpFill title="Like" />
                 <RiThumbDownFill title="Dislike" />
 
-                {/* <BsCheck title="Remove from List" onClick={addToList} /> */}
-
-                <AiOutlinePlus title="Add to my list" onClick={addToList} />
+                {liked ? (
+                  <BsCheck title="Remove from List" onClick={addToList} />
+                ) : (
+                  <AiOutlinePlus title="Add to my list" onClick={addToList} />
+                )}
               </div>
               <div className="info">
                 <BiChevronDown title="More Info" />

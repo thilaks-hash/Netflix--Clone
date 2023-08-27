@@ -10,7 +10,7 @@ export default function Header(props) {
         <img src={logo} alt="netflix logo" />
       </div>
       <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
-        {props.login ? "Log in" : "Sign In"}
+        {props.login ? "Log in" : "Sign up"}
       </button>
     </StyledHeader>
   );

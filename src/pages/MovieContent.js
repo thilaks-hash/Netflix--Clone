@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const MovieContent = () => {
   const { movieId } = useParams();
-  const navigate = useNavigate();
 
   const [movieInfo, setMovieInfo] = useState("");
 
@@ -24,13 +22,19 @@ const MovieContent = () => {
     const json = await data.json();
     setMovieInfo(json.data);
   };
-  const { thumbnail, title, video_url, cast } = movieInfo;
+  const { thumbnail, title, video_url, cast, description, keywords } =
+    movieInfo;
 
   return (
     <div>
       <div className="content">
         <img className="thumbnail" src={thumbnail} alt="movie" />
-        <h1 className="title">{title}</h1>
+        <div className="cast">
+          <h1 className="title">{title}</h1>
+          <h4 className="casts">Cast: {cast}</h4>
+          <h4 className="des">Description: {description}</h4>
+          <h4 className="genres">Genres:{keywords}</h4>
+        </div>
       </div>
 
       <Link

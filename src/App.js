@@ -11,7 +11,6 @@ import MovieContent from "./pages/MovieContent";
 import Mylist from "./pages/Mylist";
 import { SearchProvider } from "./utils/SearchContext";
 import SearchResults from "./components/SearchResults";
-import SearchBar from "./components/SearchBar";
 import UserProfilePage from "./pages/UserProfile";
 const App = () => {
   return (

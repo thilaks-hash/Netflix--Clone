@@ -36,7 +36,7 @@ const Movies = () => {
         <Navbar isScrolled={isScrolled} />
       </div>
       <div className="data">
-        <Slider movies={movies} />
+        <Slider movies={movies} key={movies.id} />
       </div>
     </Container>
   );

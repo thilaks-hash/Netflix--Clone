@@ -35,10 +35,8 @@ const TvShows = () => {
       <Navbar isScrolled={isScrolled} />
       <Container>
         <div className="data">
-          {TvShows.map((movie, index) => {
-            return (
-              <MovieCards movieData={movie} index={index} key={movie.id} />
-            );
+          {TvShows.map((movie) => {
+            return <MovieCards movieData={movie} key={movie._id} />;
           })}
         </div>
       </Container>
