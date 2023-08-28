@@ -241,5 +241,17 @@ const Container = styled.div`
   .dropdown-content a:hover {
     background-color: #f1f1f1;
   }
+  @media screen and (max-width: 768px) {
+    .links {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    .avatar {
+      width: 20px;
+      height: 20px;
+      margin: 5px;
+    }
+  }
 `;
 export default Navbar;

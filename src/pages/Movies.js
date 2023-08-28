@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import Slider from "../components/Slider";
+import Shimmer from "../components/Shimmer";
 
 const Movies = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,7 +31,9 @@ const Movies = () => {
     setIsScrolled(window.pageYOffset === 0 ? false : true);
     return () => (window.onscroll = null);
   };
-  return (
+  return movies.length === 0 ? (
+    <Shimmer />
+  ) : (
     <Container>
       <div className="navbar">
         <Navbar isScrolled={isScrolled} />
@@ -44,7 +47,7 @@ const Movies = () => {
 
 const Container = styled.div`
   .data {
-    margin-top: 8rem;
+    margin-top: -150px;
     .not-available {
       text-align: center;
       color: white;

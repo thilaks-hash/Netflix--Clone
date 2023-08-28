@@ -12,6 +12,7 @@ import Mylist from "./pages/Mylist";
 import { SearchProvider } from "./utils/SearchContext";
 import SearchResults from "./components/SearchResults";
 import UserProfilePage from "./pages/UserProfile";
+import UpdatePassword from "./components/UpdatePassword";
 const App = () => {
   return (
     <BrowserRouter>
@@ -31,7 +32,7 @@ const App = () => {
           <Route exact path="/mylist" element={<Mylist />} />
           <Route exact path="/search" element={<SearchResults />} />
           <Route exact path="/userprofile" element={<UserProfilePage />} />
-
+          <Route exact path="/updatepassword" element={<UpdatePassword />} />
           <Route exact path="/" element={<Netflix />} />
         </Routes>
       </SearchProvider>

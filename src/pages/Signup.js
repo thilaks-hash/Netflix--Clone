@@ -31,7 +31,7 @@ const Signup = () => {
       if (response.status === 201) {
         console.log(response);
 
-        alert("SuccessFully SignedUp");
+        alert("Successfully Signed Up");
 
         navigate("/");
       }
@@ -39,12 +39,13 @@ const Signup = () => {
       const errMsg = error?.response?.data?.message;
       console.error(error, errMsg);
       if (errMsg === "User already exists") {
-        alert("User already exist");
+        alert("User already exists");
       } else {
         console.log("error");
       }
     }
   };
+
   const handleSignUp = async () => {
     const bodyContent = JSON.stringify({
       name: username,
@@ -62,49 +63,50 @@ const Signup = () => {
     <Container>
       <BackgroundImage />
       <div className="content">
-        <Header login />
-        <div className="body form-container flex column a-center j-center">
-          <div className="text flex column">
+        <Headers>
+          <Header login />{" "}
+        </Headers>
+
+        <FormContainer>
+          <Form>
+            <Title>Sign Up</Title>
             <h1>Unlimited movies, TV shows and more</h1>
             <h4>Watch anywhere. Cancel anytime.</h4>
             <h6>
               Ready to watch? Enter your email to create or restart membership
             </h6>
-          </div>
-          <div className="form flex column a-center j-center">
-            <div className="container flex column">
-              <input
-                type="text"
-                name="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
 
-              <input
-                type="password"
-                placeholder="Password"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
-            <button className="btn" onClick={handleSignUp}>
+            <Input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <Input
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button className="btn" onClick={handleSignUp}>
               Sign up
-            </button>
-          </div>
-        </div>
+            </Button>
+          </Form>
+        </FormContainer>
       </div>
     </Container>
   );
 };
+
 const Container = styled.div`
   position: relative;
   .content {
@@ -114,43 +116,57 @@ const Container = styled.div`
     height: 100vh;
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.5);
-    grid-template-rows: 15vh 85vh;
-    .form-container {
-      gap: 2rem;
-      height: 85vh;
-      .form {
-        padding: 2rem;
-        background-color: #000000b0;
-        width: 25vw;
-        gap: 2rem;
-        color: white;
-        .container {
-          gap: 2rem;
-          input {
-            padding: 0.5rem 1rem;
-            width: 15rem;
-          }
-          button {
-            padding: 0.5rem 1rem;
-            background-color: red;
-            border: none;
-            cursor: pointer;
-            color: white;
-            border-radius: 0.2rem;
-            font-weight: bolder;
-            font-size: 1.05rem;
-          }
-        }
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
-  .btn {
-    background-color: red;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-  }
+`;
+
+const FormContainer = styled.div`
+  background-color: #000000b0;
+  width: 80%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 0.2rem;
+  color: white;
+`;
+const Headers = styled.header`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  color: white;
+  padding: 1rem;
+  text-align: center;
+`;
+
+const Form = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Title = styled.h3`
+  font-size: 1.5rem;
+`;
+
+const Input = styled.input`
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 0.2rem;
+`;
+
+const Button = styled.button`
+  padding: 0.5rem 1rem;
+  background-color: #e50914;
+  border: none;
+  cursor: pointer;
+  color: white;
+  border-radius: 0.2rem;
+  font-weight: bolder;
+  font-size: 1rem;
 `;
 
 export default Signup;

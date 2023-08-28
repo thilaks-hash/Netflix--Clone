@@ -5,18 +5,19 @@ import React from "react";
 export default function Header(props) {
   const navigate = useNavigate();
   return (
-    <StyledHeader className=" head">
-      <div className="logo">
-        <img src={logo} alt="netflix logo" />
+    <StyledHeader>
+      <div className="head">
+        <div className="logo">
+          <img src={logo} alt="netflix logo" />
+        </div>
+        <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
+          {props.login ? "Log in" : "Sign up"}
+        </button>
       </div>
-      <button onClick={() => navigate(props.login ? "/login" : "/signup")}>
-        {props.login ? "Log in" : "Sign up"}
-      </button>
     </StyledHeader>
   );
 }
 const StyledHeader = styled.header`
-  padding: 0 4rem;
   .logo {
     img {
       height: 5rem;
@@ -24,7 +25,7 @@ const StyledHeader = styled.header`
   }
 
   button {
-    padding: 0.5rem 1rem;
+    padding: 10px 20px;
     background-color: #e50914;
     border: none;
     cursor: pointer;
@@ -32,5 +33,12 @@ const StyledHeader = styled.header`
     border-radius: 0.2rem;
     font-weight: bolder;
     font-size: 1.05rem;
+  }
+  .head {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin: 10px;
+    left: 10px;
   }
 `;

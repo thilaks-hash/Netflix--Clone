@@ -101,3 +101,16 @@ body::-webkit-scrollbar {
 .des {
   padding: 10px;
 }
+.shimmer-card {
+  width: 100px;
+  height: 100px;
+  padding: auto;
+  margin: 20px;
+  background-color: lightgray;
+  border: gray;
+}
+.shimmer-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
