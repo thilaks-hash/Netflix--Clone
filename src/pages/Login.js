@@ -32,7 +32,7 @@ function Login() {
 
         localStorage.setItem("jwtToken", response.data.token);
         localStorage.setItem("userName", response.data.name);
-        navigate("/");
+        navigate("/netflix");
       }
     } catch (error) {
       const errMsg = error?.response?.data?.message;

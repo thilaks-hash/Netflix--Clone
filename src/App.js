@@ -18,7 +18,7 @@ const App = () => {
     <BrowserRouter>
       <SearchProvider>
         <Routes>
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={<Login />} />
           <Route exact path="/signup" element={<Signup />} />
           <Route exact path="/player" element={<Player />} />
           <Route exact path="/tv" element={<TVShows />} />
@@ -33,7 +33,7 @@ const App = () => {
           <Route exact path="/search" element={<SearchResults />} />
           <Route exact path="/userprofile" element={<UserProfilePage />} />
           <Route exact path="/updatepassword" element={<UpdatePassword />} />
-          <Route exact path="/" element={<Netflix />} />
+          <Route exact path="/netflix" element={<Netflix />} />
         </Routes>
       </SearchProvider>
     </BrowserRouter>

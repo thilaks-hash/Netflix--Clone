@@ -31,7 +31,7 @@ const Navbar = ({ isScrolled }) => {
   };
 
   const links = [
-    { name: "Home", link: "/" },
+    { name: "Home", link: "/netflix" },
     { name: "TV Shows", link: "/tv" },
     { name: "Movies", link: "/movies" },
     { name: "My List", link: "/mylist" },
@@ -68,7 +68,7 @@ const Navbar = ({ isScrolled }) => {
             </button>
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Search using genres"
               value={searchQuery}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
@@ -90,7 +90,7 @@ const Navbar = ({ isScrolled }) => {
                       <Link to={"/subscription"}>Subscription</Link>
                     </li>
                     <li>
-                      <Link to={"/login"}>SignOut</Link>
+                      <Link to={"/"}>SignOut</Link>
                     </li>
                     <li>
                       <Link to={"/userprofile"}>Profile Setting</Link>
