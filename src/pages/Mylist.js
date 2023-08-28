@@ -3,6 +3,7 @@ import MovieCards from "./MovieCards";
 import styled from "styled-components";
 
 const token = localStorage.getItem("jwtToken");
+
 const Mylist = () => {
   const [mylist, setMylist] = useState([]);
   const FetchWatchList = async () => {

@@ -33,7 +33,7 @@ const Signup = () => {
 
         alert("Successfully Signed Up");
 
-        navigate("/");
+        navigate("/login");
       }
     } catch (error) {
       const errMsg = error?.response?.data?.message;
