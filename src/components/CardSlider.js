@@ -10,7 +10,7 @@ export default React.memo(function CardSlider({ data, title }) {
       <h1>{title}</h1>
       <div className="wrapper">
         <div className="slider flex" ref={listRef}>
-          {data.map((movie, index) => {
+          {data.map((movie) => {
             return (
               <MovieCards movieData={movie} key={movie.id} isLiked={false} />
             );

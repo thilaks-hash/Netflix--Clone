@@ -6,23 +6,23 @@ import styled from "styled-components";
 const SearchResults = () => {
   const { searchQuery } = useSearch();
   const [results, setResults] = useState([]);
-
   useEffect(() => {
-    fetchSearch();
-  }, []);
-  const fetchSearch = async () => {
-    const data = await fetch(
-      `https://academics.newtonschool.co/api/v1/ott/show?filter={"keywords" : "${searchQuery}"}`,
-      {
-        headers: {
-          projectId: "711pehg5ja32",
-        },
-      }
-    );
-    const json = await data.json();
-    console.log(json.data);
-    setResults(json.data);
-  };
+    const fetchSearch = async () => {
+      const data = await fetch(
+        `https://academics.newtonschool.co/api/v1/ott/show?filter={"keywords" : "${searchQuery}"}`,
+        {
+          headers: {
+            projectId: "711pehg5ja32",
+          },
+        }
+      );
+      const json = await data.json();
+      console.log(json.data);
+      setResults(json.data);
+    };
+
+    fetchSearch(); // Call fetchSearch inside the useEffect
+  }, [searchQuery]);
   return (
     <>
       <Container>

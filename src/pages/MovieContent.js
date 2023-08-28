@@ -8,23 +8,22 @@ const MovieContent = () => {
   const [movieInfo, setMovieInfo] = useState("");
 
   useEffect(() => {
+    const fetchContent = async () => {
+      const data = await fetch(
+        `https://academics.newtonschool.co/api/v1/ott/show/${movieId}`,
+        {
+          headers: {
+            projectId: "711pehg5ja32",
+          },
+        }
+      );
+      const json = await data.json();
+      setMovieInfo(json.data);
+    };
     fetchContent();
-  }, []);
-  const fetchContent = async () => {
-    const data = await fetch(
-      `https://academics.newtonschool.co/api/v1/ott/show/${movieId}`,
-      {
-        headers: {
-          projectId: "711pehg5ja32",
-        },
-      }
-    );
-    const json = await data.json();
-    setMovieInfo(json.data);
-  };
+  }, [movieId]);
   const { thumbnail, title, video_url, cast, description, keywords } =
     movieInfo;
-
   return (
     <div>
       <div className="content">
