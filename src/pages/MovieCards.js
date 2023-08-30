@@ -6,13 +6,14 @@ import { AiOutlinePlus } from "react-icons/ai";
 import { BsCheck } from "react-icons/bs";
 import { RiThumbUpFill, RiThumbDownFill } from "react-icons/ri";
 import { BiChevronDown } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 import video from "../assets/video.mp4";
 const MovieCards = (props) => {
   const navigate = useNavigate();
 
   const { movieData } = props;
-  const { thumbnail, keywords, title, _id } = movieData;
+  const { thumbnail, keywords, title, _id, video_url } = movieData;
   const [isHovered, setIsHovered] = useState(false);
   const [liked, setLiked] = useState(false);
   const token = localStorage.getItem("jwtToken");
@@ -82,10 +83,9 @@ const MovieCards = (props) => {
             </h3>
             <div className="icons flex j-between">
               <div className="controls flex">
-                <IoPlayCircleSharp
-                  title="Play"
-                  onClick={() => navigate("/player")}
-                />
+                <Link to={`/player?videoUrl=${encodeURIComponent(video_url)}`}>
+                  <IoPlayCircleSharp title="Play" className="play-icon" />
+                </Link>
                 <RiThumbUpFill title="Like" />
                 <RiThumbDownFill title="Dislike" />
 
@@ -189,6 +189,9 @@ const Container = styled.div`
         }
       }
     }
+  }
+  .play-icon {
+    color: #999999;
   }
 `;
 export default MovieCards;
