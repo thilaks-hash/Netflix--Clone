@@ -32,7 +32,7 @@ const Mylist = () => {
 
   useEffect(() => {
     FetchWatchList();
-  }, [mylist]);
+  }, []);
   return (
     <Container>
       <div>
