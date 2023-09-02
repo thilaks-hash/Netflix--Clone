@@ -6,16 +6,21 @@ import { FaSearch } from "react-icons/fa";
 import avatar from "../assets/Netflix-avatar.png";
 import { useNavigate } from "react-router-dom";
 import { useSearch } from "../utils/SearchContext";
+import { FaBars } from "react-icons/fa";
 
 const Navbar = ({ isScrolled }) => {
   const navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
   const [inputHover, setInputHover] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { searchQuery, setSearchQuery } = useSearch();
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+  const toggleMobileMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   const handleChange = (event) => {
@@ -42,19 +47,29 @@ const Navbar = ({ isScrolled }) => {
       <nav className={`${isScrolled ? "scrolled" : ""} flex`}>
         <div className="left flex a-center">
           <div className="brand flex a-center j-center">
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" className="logo" />
           </div>
-          <ul className="links flex">
-            {links.map(({ name, link }) => {
-              return (
-                <li key={name}>
-                  <Link to={link}>{name}</Link>
-                </li>
-              );
-            })}
-          </ul>
+          {isMenuOpen ? (
+            <ul className="menuOpen">
+              {links.map(({ name, link }) => (
+                <Link key={name} to={link}>
+                  {name}
+                </Link>
+              ))}
+            </ul>
+          ) : (
+            <ul className="links flex navigation">
+              {links.map(({ name, link }) => {
+                return (
+                  <li key={name}>
+                    <Link to={link}>{name}</Link>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
-        <div className="right flex a-center">
+        <div className="right flex a-center ">
           <div className={`search ${showSearch ? "show-search" : ""}`}>
             <button
               onFocus={() => setShowSearch(true)}
@@ -80,6 +95,9 @@ const Navbar = ({ isScrolled }) => {
               }}
             />
           </div>
+          <button className="hamburger" onClick={toggleMobileMenu}>
+            <FaBars />
+          </button>
           <button onClick={toggleDropdown}>
             <div className="image-dropdown">
               <img src={avatar} alt="avatar_icon" className="avatar" />
@@ -108,6 +126,9 @@ const Navbar = ({ isScrolled }) => {
 const Container = styled.div`
   .scrolled {
     background-color: black;
+  }
+  .brand {
+    padding: 10px;
   }
   nav {
     top: 0;
@@ -241,17 +262,69 @@ const Container = styled.div`
   .dropdown-content a:hover {
     background-color: #f1f1f1;
   }
+  .hamburger {
+    display: none;
+  }
   @media screen and (max-width: 768px) {
-    .links {
-      display: flex;
-      flex-direction: column;
-      padding: 10px;
-    }
     .avatar {
       width: 20px;
       height: 20px;
       margin: 5px;
     }
   }
+
+  @media only screen and (max-width: 768px) {
+    .hamburger {
+      display: block;
+      cursor: pointer;
+    }
+    .navigation {
+      display: none;
+    }
+    .menuOpen {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: black;
+      border: 1px solid #ccc;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      min-width: 100%;
+
+      z-index: 1;
+      padding-right: 10px;
+    }
+
+    .menuOpen ul {
+      list-style-type: none;
+
+      padding: 0;
+      margin: 0;
+    }
+
+    .menuOpen li {
+      padding: 8px 16px;
+    }
+
+    .menuOpen a {
+      text-decoration: none;
+      color: white;
+    }
+
+    .menuOpen a:hover {
+      background-color: #f1f1f1;
+      color: red;
+    }
+    .brand {
+      padding-right: 0px;
+    }
+    .logo {
+      width: 120px;
+      height: 50px;
+      padding-right: 30px;
+    }
+  }
 `;
+
 export default Navbar;

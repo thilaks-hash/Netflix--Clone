@@ -40,28 +40,27 @@ const StyledHeader = styled.header`
 
   .head {
     display: flex;
-    justify-content: space-between; /* Use space-between for better spacing */
-    align-items: center; /* Vertically center the content */
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     margin: 10px;
     left: 10px;
   }
 
-  /* Media Query for smaller screens */
   @media screen and (max-width: 768px) {
     .head {
-      flex-direction: column; /* Stack items vertically */
+      flex-direction: column;
       align-items: center;
     }
 
     .logo {
       img {
-        height: 4rem; /* Adjust the logo size */
+        height: 4rem;
       }
     }
 
     button {
-      margin-top: 10px; /* Add some spacing between logo and button */
+      margin-top: 10px;
     }
   }
 `;
