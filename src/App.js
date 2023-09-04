@@ -18,8 +18,8 @@ const App = () => {
     <BrowserRouter>
       <SearchProvider>
         <Routes>
-          <Route exact path="/" element={<Login />} />
-          <Route exact path="/signup" element={<Signup />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/" element={<Signup />} />
           <Route exact path="/player" element={<Player />} />
           <Route exact path="/tv" element={<TVShows />} />
           <Route exact path="/movies" element={<PopularMovie />} />

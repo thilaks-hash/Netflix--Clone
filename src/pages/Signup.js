@@ -24,7 +24,7 @@ const Signup = () => {
     headers: headersList,
   };
 
-  const login = async () => {
+  const signup = async () => {
     try {
       let response = await axios.request(reqOptions);
       console.log(response);
@@ -33,7 +33,7 @@ const Signup = () => {
 
         alert("Successfully Signed Up");
 
-        navigate("/");
+        navigate("/login");
       }
     } catch (error) {
       const errMsg = error?.response?.data?.message;
@@ -56,7 +56,7 @@ const Signup = () => {
 
     reqOptions.data = bodyContent;
 
-    await login();
+    await signup();
   };
 
   return (
