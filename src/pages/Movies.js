@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import styled from "styled-components";
 import Slider from "../components/Slider";
 import Shimmer from "../components/Shimmer";
+import { projectid } from "../utils/constants";
+// import { Movie_URL } from "../utils/constants";
 
 const Movies = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -14,7 +16,7 @@ const Movies = () => {
       "https://academics.newtonschool.co/api/v1/ott/show",
       {
         headers: {
-          projectId: "711pehg5ja32",
+          projectId: projectid,
         },
       }
     );
