@@ -265,7 +265,7 @@ const Container = styled.div`
   .hamburger {
     display: none;
   }
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 980px) {
     .avatar {
       width: 20px;
       height: 20px;
@@ -273,7 +273,7 @@ const Container = styled.div`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 980px) {
     .hamburger {
       display: block;
       cursor: pointer;
