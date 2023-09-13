@@ -113,6 +113,9 @@ const Navbar = ({ isScrolled }) => {
                     <li>
                       <Link to={"/userprofile"}>Profile Setting</Link>
                     </li>
+                    <li>
+                      <Link to={"/updatepassword"}>password Setting</Link>
+                    </li>
                   </ul>
                 </div>
               )}

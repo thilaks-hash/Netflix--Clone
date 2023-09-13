@@ -1,70 +1,93 @@
 import React, { useState } from "react";
-const token = localStorage.getItem("jwtToken");
-const UpdateNameAndEmail = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [responseMessage, setResponseMessage] = useState("");
+import axios from "axios";
+import { projectid } from "../utils/constants";
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+const UpdatePasswordForm = () => {
+  const [formData, setFormData] = useState({
+    name: "test6969",
+    email: "test6969@gmail.com",
+    passwordCurrent: "12345",
+    password: "1234567890",
+    appType: "ott",
+  });
 
-    const url = "https://academics.newtonschool.co/api/v1/user/updateMe";
+  const projectId = projectid; // Replace with your actual project ID
 
-    try {
-      const response = await fetch(url, {
-        method: "PATCH",
-        body: JSON.stringify({
-          name,
-          email,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-          ProjectId: "711pehg5ja32",
-        },
+  const handlePasswordUpdate = () => {
+    axios
+      .patch(
+        "https://academics.newtonschool.co/api/v1/user/updateMyPassword",
+        formData,
+        {
+          headers: {
+            projectId,
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Password updated successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error updating password:", error);
       });
+  };
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setResponseMessage("Profile updated successfully.");
-      } else {
-        setResponseMessage(`Error: ${data.message}`);
-      }
-    } catch (error) {
-      setResponseMessage("An error occurred. Please try again later.");
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   return (
     <div>
-      <h2>Update Name and Email</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit">Update Name and Email</button>
-      </form>
-      <p>{responseMessage}</p>
+      <h2>Update Password</h2>
+      <div>
+        <label>Name:</label>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label>Email:</label>
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label>Current Password:</label>
+        <input
+          type="password"
+          name="passwordCurrent"
+          value={formData.passwordCurrent}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label>New Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
+        />
+      </div>
+      <div>
+        <label>App Type:</label>
+        <input
+          type="text"
+          name="appType"
+          value={formData.appType}
+          onChange={handleChange}
+        />
+      </div>
+      <button onClick={handlePasswordUpdate}>Update Password</button>
     </div>
   );
 };
 
-export default UpdateNameAndEmail;
+export default UpdatePasswordForm;
