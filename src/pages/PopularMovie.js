@@ -18,7 +18,7 @@ const PopularMovie = () => {
       }
     );
     const json = await data.json();
-    console.log(json.data);
+    // console.log(json.data);
     setPopularMovie(json.data);
   };
 

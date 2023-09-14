@@ -21,7 +21,6 @@ const Mylist = () => {
       );
 
       const json = await data.json();
-      console.log(json.data.shows);
       setMylist(json.data.shows);
     } catch (error) {
       console.error("Error fetching watchlist data:", error);

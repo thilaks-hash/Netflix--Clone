@@ -28,7 +28,7 @@ const MovieCards = (props) => {
     const requestBody = {
       showId: showId,
     };
-    console.log(requestBody);
+    //console.log(requestBody);
 
     const data = await fetch(
       " https://academics.newtonschool.co/api/v1/ott/watchlist/like",
