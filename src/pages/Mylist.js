@@ -28,11 +28,10 @@ const Mylist = () => {
       return [];
     }
   };
-  console.log(mylist);
 
   useEffect(() => {
     FetchWatchList();
-  }, []);
+  }, [mylist]);
   return (
     <Container>
       <div>
